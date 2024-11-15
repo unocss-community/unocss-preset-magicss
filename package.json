@@ -1,24 +1,24 @@
 {
-  "name": "unocss-preset-starter",
+  "name": "unocss-preset-magicss",
   "type": "module",
   "version": "0.0.0",
-  "packageManager": "pnpm@8.7.0",
-  "description": "<description>",
-  "author": "unpreset <https://github.com/unpreset>",
+  "packageManager": "pnpm@9.13.2",
+  "description": "Integrate magic animation into unocss preset.",
+  "author": "Chris <https://github.com/zyyv>",
   "license": "MIT",
-  "homepage": "https://github.com/unpreset/unocss-preset-starter#readme",
+  "homepage": "https://github.com/unpreset/unocss-preset-magicss#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/unpreset/unocss-preset-starter.git"
+    "url": "git+https://github.com/unpreset/unocss-preset-magicss.git"
   },
   "bugs": {
-    "url": "https://github.com/unpreset/unocss-preset-starter/issues"
+    "url": "https://github.com/unpreset/unocss-preset-magicss/issues"
   },
   "keywords": [
     "unocss",
     "unpreset",
     "unocss-preset",
-    "unocss-preset-starter"
+    "unocss-preset-magicss"
   ],
   "sideEffects": false,
   "exports": {
@@ -54,21 +54,22 @@
     "play": "vite playground",
     "deploy": "vite build playground"
   },
-  "dependencies": {
-    "@unocss/core": "^0.64.0"
+  "peerDependencies": {
+    "unocss": "^0.64.1"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^3.8.0",
+    "@antfu/eslint-config": "^3.9.1",
     "@babel/types": "^7.26.0",
     "@types/node": "^22.9.0",
-    "@unocss/eslint-plugin": "^0.64.0",
-    "@vitejs/plugin-vue": "^5.1.4",
+    "@unocss/eslint-plugin": "^0.64.1",
+    "@unocss/preset-mini": "^0.64.1",
+    "@vitejs/plugin-vue": "^5.2.0",
     "bumpp": "^9.8.1",
     "eslint": "^9.14.0",
     "typescript": "5.6.3",
     "unbuild": "^2.0.0",
-    "unocss": "^0.64.0",
-    "vite": "^5.4.10",
-    "vitest": "^2.1.4"
+    "unocss": "^0.64.1",
+    "vite": "^5.4.11",
+    "vitest": "^2.1.5"
   }
 }

@@ -1,24 +1,25 @@
-# unocss-preset-starter [![npm](https://img.shields.io/npm/v/unocss-preset-starter)](https://npmjs.com/package/unocss-preset-starter)
+# unocss-preset-magicss [![npm](https://img.shields.io/npm/v/unocss-preset-magicss)](https://npmjs.com/package/unocss-preset-magicss)
 
-UnoCSS preset quickstart template.
+Integrate magic animation into unocss preset.
 
 ## Features
-- 🔥 Description of the preset
+- 📦 Build-In [Magic Animate](https://github.com/miniMAC/magic).
 
 ## Usage
 ```shell
-pnpm i -D unocss-preset-starter unocss
+pnpm i -D unocss-preset-magicss unocss
 ```
 
 ```ts
 // uno.config.ts
-import { defineConfig } from 'unocss'
-import { presetStarter } from 'unocss-preset-starter'
+import { defineConfig, presetUno } from 'unocss'
+import { presetMagicss } from 'unocss-preset-magicss'
 
 export default defineConfig({
   presets: [
     // ...
-    presetStarter(),
+    presetUno(),
+    presetMagicss(),
   ],
 })
 ```

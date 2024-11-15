@@ -1,19 +1,19 @@
-import { createGenerator } from 'unocss'
+import { createGenerator, presetUno } from 'unocss'
 import { expect, it } from 'vitest'
-import { presetStarter } from '../src'
+import { presetMagicss } from '../src'
 
 it('presetStarter', async () => {
   const uno = createGenerator({
-    presets: [presetStarter()],
+    presets: [
+      presetUno(),
+      presetMagicss(),
+    ],
   })
-  const presets = uno.config.presets
-  expect(presets).toHaveLength(1)
-
-  const { css } = await uno.generate('col-1 @active:col-2')
+  const { css } = await uno.generate('animate-magic', { preflights: false })
 
   expect(css).toMatchInlineSnapshot(`
     "/* layer: default */
-    .\\@active\\:col-2.active{width:calc(2 / 12 * 100%);}
-    .col-1{width:calc(1 / 12 * 100%);}"
+    @keyframes magic{0% {opacity: 1;-webkit-transform-origin: 100% 200%;transform-origin: 100% 200%;-webkit-transform: scale(1, 1) rotate(0deg);transform: scale(1, 1) rotate(0deg);}100% {opacity: 0;-webkit-transform-origin: 200% 500%;transform-origin: 200% 500%;-webkit-transform: scale(0, 0) rotate(270deg);transform: scale(0, 0) rotate(270deg);}}
+    .animate-magic{animation:magic 1s linear 1;}"
   `)
 })

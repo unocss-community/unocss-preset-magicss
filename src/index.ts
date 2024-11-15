@@ -1,65 +1,146 @@
-import { definePreset } from '@unocss/core'
+import type { Theme } from '@unocss/preset-mini'
+import { definePreset } from 'unocss'
 
-export interface StarterOptions {
-  /**
-   *  The number of columns in the grid system (Example option)
-   *
-   * @default 12
-   */
-  span?: number
-}
-
-export const presetStarter = definePreset((_options: StarterOptions = {}) => {
-  const span = _options.span ?? 12
-
+export const presetMagicss = definePreset<Theme>(() => {
   return {
-    name: 'unocss-preset-starter',
-
+    name: 'unocss-preset-magicss',
     theme: {
-      // Customize your theme here
-    },
-
-    // Customize your preset here
-    rules: [
-      ['custom-rule', { color: 'red' }],
-      [
-        /col-(\d+)/,
-        ([_, s]) => ({ width: `calc(${s} / ${span} * 100%)` }),
-        { autocomplete: 'col-<span>' },
-      ],
-    ],
-
-    // Customize your variants here
-    variants: [
-      {
-        name: '@active',
-        match(matcher) {
-          if (!matcher.startsWith('@active'))
-            return matcher
-
-          return {
-            matcher: matcher.slice(8),
-            selector: s => `${s}.active`,
-          }
+      animation: {
+        keyframes: {
+          'puff-in': `{0% {opacity: 0;transform-origin: 50% 50%;transform: scale(2, 2);filter: blur(2px);}100% {opacity: 1;transform-origin: 50% 50%;transform: scale(1, 1);filter: blur(0px);}}`,
+          'puff-out': `{0% {opacity: 1;transform-origin: 50% 50%;transform: scale(1, 1);filter: blur(0px);}100% {opacity: 0;transform-origin: 50% 50%;transform: scale(2, 2);filter: blur(2px);}}`,
+          'vanish-in': `{0% {opacity: 0;transform-origin: 50% 50%;transform: scale(2, 2);filter: blur(90px);}100% {opacity: 1;transform-origin: 50% 50%;transform: scale(1, 1);filter: blur(0px);}}`,
+          'vanish-out': `{0% {opacity: 1;transform-origin: 50% 50%;transform: scale(1, 1);filter: blur(0px);}100% {opacity: 0;transform-origin: 50% 50%;transform: scale(2, 2);filter: blur(20px);}}`,
+          'boing-in-up': `{0% {opacity: 0;-webkit-transform-origin: 50% 0%;transform-origin: 50% 0%;-webkit-transform: perspective(800px) rotateX(-90deg);transform: perspective(800px) rotateX(-90deg);}50% {opacity: 1;-webkit-transform-origin: 50% 0%;transform-origin: 50% 0%;-webkit-transform: perspective(800px) rotateX(50deg);transform: perspective(800px) rotateX(50deg);}100% {opacity: 1;-webkit-transform-origin: 50% 0%;transform-origin: 50% 0%;-webkit-transform: perspective(800px) rotateX(0deg);transform: perspective(800px) rotateX(0deg);}}`,
+          'boing-out-down': `{0% {opacity: 1;-webkit-transform-origin: 100% 100%;transform-origin: 100% 100%;-webkit-transform: perspective(800px) rotateX(0deg) rotateY(0deg);transform: perspective(800px) rotateX(0deg) rotateY(0deg);}20% {opacity: 1;-webkit-transform-origin: 100% 100%;transform-origin: 100% 100%;-webkit-transform: perspective(800px) rotateX(0deg) rotateY(10deg);transform: perspective(800px) rotateX(0deg) rotateY(10deg);}30% {opacity: 1;-webkit-transform-origin: 0% 100%;transform-origin: 0% 100%;-webkit-transform: perspective(800px) rotateX(0deg) rotateY(0deg);transform: perspective(800px) rotateX(0deg) rotateY(0deg);}40% {opacity: 1;-webkit-transform-origin: 0% 100%;transform-origin: 0% 100%;-webkit-transform: perspective(800px) rotateX(10deg) rotateY(10deg);transform: perspective(800px) rotateX(10deg) rotateY(10deg);}100% {opacity: 0;-webkit-transform-origin: 100% 100%;transform-origin: 100% 100%;-webkit-transform: perspective(800px) rotateX(90deg) rotateY(0deg);transform: perspective(800px) rotateX(90deg) rotateY(0deg);}}`,
+          'bomb-left-out': `{0% {opacity: 1;-webkit-transform-origin: 50% 50%;transform-origin: 50% 50%;-webkit-transform: rotate(0deg);transform: rotate(0deg);-webkit-filter: blur(0px);filter: blur(0px);}50% {opacity: 1;-webkit-transform-origin: -100% 50%;transform-origin: -100% 50%;-webkit-transform: rotate(-160deg);transform: rotate(-160deg);-webkit-filter: blur(0px);filter: blur(0px);}100% {opacity: 0;-webkit-transform-origin: -100% 50%;transform-origin: -100% 50%;-webkit-transform: rotate(-160deg);transform: rotate(-160deg);-webkit-filter: blur(20px);filter: blur(20px);}}`,
+          'bomb-right-out': `{0% {opacity: 1;-webkit-transform-origin: 50% 50%;transform-origin: 50% 50%;-webkit-transform: rotate(0deg);transform: rotate(0deg);-webkit-filter: blur(0px);filter: blur(0px);}50% {opacity: 1;-webkit-transform-origin: 200% 50%;transform-origin: 200% 50%;-webkit-transform: rotate(160deg);transform: rotate(160deg);-webkit-filter: blur(0px);filter: blur(0px);}100% {opacity: 0;-webkit-transform-origin: 200% 50%;transform-origin: 200% 50%;-webkit-transform: rotate(160deg);transform: rotate(160deg);-webkit-filter: blur(20px);filter: blur(20px);}}`,
+          'magic': `{0% {opacity: 1;-webkit-transform-origin: 100% 200%;transform-origin: 100% 200%;-webkit-transform: scale(1, 1) rotate(0deg);transform: scale(1, 1) rotate(0deg);}100% {opacity: 0;-webkit-transform-origin: 200% 500%;transform-origin: 200% 500%;-webkit-transform: scale(0, 0) rotate(270deg);transform: scale(0, 0) rotate(270deg);}}`,
+          'swap': `{0% {opacity: 0;-webkit-transform-origin: 0 100%;transform-origin: 0 100%;-webkit-transform: scale(0, 0) translate(-700px, 0px);transform: scale(0, 0) translate(-700px, 0px);}100% {opacity: 1;-webkit-transform-origin: 100% 100%;transform-origin: 100% 100%;-webkit-transform: scale(1, 1) translate(0px, 0px);transform: scale(1, 1) translate(0px, 0px);}}`,
+          'twister-in-down': `{0% {opacity: 0;-webkit-transform-origin: 0 100%;transform-origin: 0 100%;-webkit-transform: scale(0, 0) rotate(360deg) translateY(-100%);transform: scale(0, 0) rotate(360deg) translateY(-100%);}30% {-webkit-transform-origin: 0 100%;transform-origin: 0 100%;-webkit-transform: scale(0, 0) rotate(360deg) translateY(-100%);transform: scale(0, 0) rotate(360deg) translateY(-100%);}100% {opacity: 1;-webkit-transform-origin: 100% 100%;transform-origin: 100% 100%;-webkit-transform: scale(1, 1) rotate(0deg) translateY(0%);transform: scale(1, 1) rotate(0deg) translateY(0%);}}`,
+          'twister-in-up': `{0% {opacity: 0;-webkit-transform-origin: 100% 0;transform-origin: 100% 0;-webkit-transform: scale(0, 0) rotate(360deg) translateY(100%);transform: scale(0, 0) rotate(360deg) translateY(100%);}30% {-webkit-transform-origin: 100% 0;transform-origin: 100% 0;-webkit-transform: scale(0, 0) rotate(360deg) translateY(100%);transform: scale(0, 0) rotate(360deg) translateY(100%);}100% {opacity: 1;-webkit-transform-origin: 0 0;transform-origin: 0 0;-webkit-transform: scale(1, 1) rotate(0deg) translateY(0);transform: scale(1, 1) rotate(0deg) translateY(0);}}`,
+          'foolish-in': `{0% {opacity: 0;-webkit-transform-origin: 50% 50%;transform-origin: 50% 50%;-webkit-transform: scale(0, 0) rotate(360deg);transform: scale(0, 0) rotate(360deg);}20% {opacity: 1;-webkit-transform-origin: 0% 100%;transform-origin: 0% 100%;-webkit-transform: scale(0.5, 0.5) rotate(0deg);transform: scale(0.5, 0.5) rotate(0deg);}40% {opacity: 1;-webkit-transform-origin: 100% 100%;transform-origin: 100% 100%;-webkit-transform: scale(0.5, 0.5) rotate(0deg);transform: scale(0.5, 0.5) rotate(0deg);}60% {opacity: 1;-webkit-transform-origin: 0%;transform-origin: 0%;-webkit-transform: scale(0.5, 0.5) rotate(0deg);transform: scale(0.5, 0.5) rotate(0deg);}80% {opacity: 1;-webkit-transform-origin: 0% 0%;transform-origin: 0% 0%;-webkit-transform: scale(0.5, 0.5) rotate(0deg);transform: scale(0.5, 0.5) rotate(0deg);}100% {opacity: 1;-webkit-transform-origin: 50% 50%;transform-origin: 50% 50%;-webkit-transform: scale(1, 1) rotate(0deg);transform: scale(1, 1) rotate(0deg);}}`,
+          'foolish-out': `{0% {opacity: 1;-webkit-transform-origin: 50% 50%;transform-origin: 50% 50%;-webkit-transform: scale(1, 1) rotate(360deg);transform: scale(1, 1) rotate(360deg);}20% {opacity: 1;-webkit-transform-origin: 0% 0%;transform-origin: 0% 0%;-webkit-transform: scale(0.5, 0.5) rotate(0deg);transform: scale(0.5, 0.5) rotate(0deg);}40% {opacity: 1;-webkit-transform-origin: 100% 0%;transform-origin: 100% 0%;-webkit-transform: scale(0.5, 0.5) rotate(0deg);transform: scale(0.5, 0.5) rotate(0deg);}60% {opacity: 1;-webkit-transform-origin: 0%;transform-origin: 0%;-webkit-transform: scale(0.5, 0.5) rotate(0deg);transform: scale(0.5, 0.5) rotate(0deg);}80% {opacity: 1;-webkit-transform-origin: 0% 100%;transform-origin: 0% 100%;-webkit-transform: scale(0.5, 0.5) rotate(0deg);transform: scale(0.5, 0.5) rotate(0deg);}100% {opacity: 0;-webkit-transform-origin: 50% 50%;transform-origin: 50% 50%;-webkit-transform: scale(0, 0) rotate(0deg);transform: scale(0, 0) rotate(0deg);}}`,
+          'hole-out': `{0% {opacity: 1;-webkit-transform-origin: 50% 50%;transform-origin: 50% 50%;-webkit-transform: scale(1, 1) rotateY(0deg);transform: scale(1, 1) rotateY(0deg);}100% {opacity: 0;-webkit-transform-origin: 50% 50%;transform-origin: 50% 50%;-webkit-transform: scale(0, 0) rotateY(180deg);transform: scale(0, 0) rotateY(180deg);}}`,
+          'swash-in': `{0% {opacity: 0;-webkit-transform-origin: 50% 50%;transform-origin: 50% 50%;-webkit-transform: scale(0, 0);transform: scale(0, 0);}90% {opacity: 1;-webkit-transform-origin: 50% 50%;transform-origin: 50% 50%;-webkit-transform: scale(0.9, 0.9);transform: scale(0.9, 0.9);}100% {opacity: 1;-webkit-transform-origin: 50% 50%;transform-origin: 50% 50%;-webkit-transform: scale(1, 1);transform: scale(1, 1);}}`,
+          'swash-out': `{0% {opacity: 1;-webkit-transform-origin: 50% 50%;transform-origin: 50% 50%;-webkit-transform: scale(1, 1);transform: scale(1, 1);}80% {opacity: 1;-webkit-transform-origin: 50% 50%;transform-origin: 50% 50%;-webkit-transform: scale(0.9, 0.9);transform: scale(0.9, 0.9);}100% {opacity: 0;-webkit-transform-origin: 50% 50%;transform-origin: 50% 50%;-webkit-transform: scale(0, 0);transform: scale(0, 0);}}`,
+          'space-in-down': `{0% {opacity: 0;-webkit-transform-origin: 50% 100%;transform-origin: 50% 100%;-webkit-transform: scale(0.2) translate(0%, 200%);transform: scale(0.2) translate(0%, 200%);}100% {opacity: 1;-webkit-transform-origin: 50% 100%;transform-origin: 50% 100%;-webkit-transform: scale(1) translate(0%, 0%);transform: scale(1) translate(0%, 0%);}}`,
+          'space-in-left': `{0% {opacity: 0;-webkit-transform-origin: 0% 50%;transform-origin: 0% 50%;-webkit-transform: scale(0.2) translate(-200%, 0%);transform: scale(0.2) translate(-200%, 0%);}100% {opacity: 1;-webkit-transform-origin: 0% 50%;transform-origin: 0% 50%;-webkit-transform: scale(1) translate(0%, 0%);transform: scale(1) translate(0%, 0%);}}`,
+          'space-in-right': `{0% {opacity: 0;-webkit-transform-origin: 100% 50%;transform-origin: 100% 50%;-webkit-transform: scale(0.2) translate(200%, 0%);transform: scale(0.2) translate(200%, 0%);}100% {opacity: 1;-webkit-transform-origin: 100% 50%;transform-origin: 100% 50%;-webkit-transform: scale(1) translate(0%, 0%);transform: scale(1) translate(0%, 0%);}}`,
+          'space-in-up': `{0% {opacity: 0;-webkit-transform-origin: 50% 0%;transform-origin: 50% 0%;-webkit-transform: scale(0.2) translate(0%, -200%);transform: scale(0.2) translate(0%, -200%);}100% {opacity: 1;-webkit-transform-origin: 50% 0%;transform-origin: 50% 0%;-webkit-transform: scale(1) translate(0%, 0%);transform: scale(1) translate(0%, 0%);}}`,
+          'space-out-down': `{0% {opacity: 1;-webkit-transform-origin: 50% 100%;transform-origin: 50% 100%;-webkit-transform: scale(1) translate(0%, 0%);transform: scale(1) translate(0%, 0%);}100% {opacity: 0;-webkit-transform-origin: 50% 100%;transform-origin: 50% 100%;-webkit-transform: scale(0.2) translate(0%, 200%);transform: scale(0.2) translate(0%, 200%);}}`,
+          'space-out-left': `{0% {opacity: 1;-webkit-transform-origin: 0% 50%;transform-origin: 0% 50%;-webkit-transform: scale(1) translate(0%, 0%);transform: scale(1) translate(0%, 0%);}100% {opacity: 0;-webkit-transform-origin: 0% 50%;transform-origin: 0% 50%;-webkit-transform: scale(0.2) translate(-200%, 0%);transform: scale(0.2) translate(-200%, 0%);}}`,
+          'space-out-right': `{0% {opacity: 1;-webkit-transform-origin: 100% 50%;transform-origin: 100% 50%;-webkit-transform: scale(1) translate(0%, 0%);transform: scale(1) translate(0%, 0%);}100% {opacity: 0;-webkit-transform-origin: 100% 50%;transform-origin: 100% 50%;-webkit-transform: scale(0.2) translate(200%, 0%);transform: scale(0.2) translate(200%, 0%);}}`,
+          'space-out-up': `{0% {opacity: 1;-webkit-transform-origin: 50% 0%;transform-origin: 50% 0%;-webkit-transform: scale(1) translate(0%, 0%);transform: scale(1) translate(0%, 0%);}100% {opacity: 0;-webkit-transform-origin: 50% 0%;transform-origin: 50% 0%;-webkit-transform: scale(0.2) translate(0%, -200%);transform: scale(0.2) translate(0%, -200%);}}`,
+          'perspective-down': `{0% {-webkit-transform-origin: 0 100%;transform-origin: 0 100%;-webkit-transform: perspective(800px) rotateX(0deg);transform: perspective(800px) rotateX(0deg);}100% {-webkit-transform-origin: 0 100%;transform-origin: 0 100%;-webkit-transform: perspective(800px) rotateX(-180deg);transform: perspective(800px) rotateX(-180deg);}}`,
+          'perspective-down-return': `{0% {-webkit-transform-origin: 0 100%;transform-origin: 0 100%;-webkit-transform: perspective(800px) rotateX(-180deg);transform: perspective(800px) rotateX(-180deg);}100% {-webkit-transform-origin: 0 100%;transform-origin: 0 100%;-webkit-transform: perspective(800px) rotateX(0deg);transform: perspective(800px) rotateX(0deg);}}`,
+          'perspective-left': `{0% {-webkit-transform-origin: 0 0;transform-origin: 0 0;-webkit-transform: perspective(800px) rotateY(0deg);transform: perspective(800px) rotateY(0deg);}100% {-webkit-transform-origin: 0 0;transform-origin: 0 0;-webkit-transform: perspective(800px) rotateY(-180deg);transform: perspective(800px) rotateY(-180deg);}}`,
+          'perspective-left-return': `{0% {-webkit-transform-origin: 0 0;transform-origin: 0 0;-webkit-transform: perspective(800px) rotateY(-180deg);transform: perspective(800px) rotateY(-180deg);}100% {-webkit-transform-origin: 0 0;transform-origin: 0 0;-webkit-transform: perspective(800px) rotateY(0deg);transform: perspective(800px) rotateY(0deg);}}`,
+          'perspective-right': `{0% {-webkit-transform-origin: 100% 0;transform-origin: 100% 0;-webkit-transform: perspective(800px) rotateY(0deg);transform: perspective(800px) rotateY(0deg);}100% {-webkit-transform-origin: 100% 0;transform-origin: 100% 0;-webkit-transform: perspective(800px) rotateY(180deg);transform: perspective(800px) rotateY(180deg);}}`,
+          'perspective-right-return': `{0% {-webkit-transform-origin: 100% 0;transform-origin: 100% 0;-webkit-transform: perspective(800px) rotateY(180deg);transform: perspective(800px) rotateY(180deg);}100% {-webkit-transform-origin: 100% 0;transform-origin: 100% 0;-webkit-transform: perspective(800px) rotateY(0deg);transform: perspective(800px) rotateY(0deg);}}`,
+          'perspective-up': `{0% {-webkit-transform-origin: 0 0;transform-origin: 0 0;-webkit-transform: perspective(800px) rotateX(0deg);transform: perspective(800px) rotateX(0deg);}100% {-webkit-transform-origin: 0 0;transform-origin: 0 0;-webkit-transform: perspective(800px) rotateX(180deg);transform: perspective(800px) rotateX(180deg);}}`,
+          'perspective-up-return': `{0% {-webkit-transform-origin: 0 0;transform-origin: 0 0;-webkit-transform: perspective(800px) rotateX(180deg);transform: perspective(800px) rotateX(180deg);}100% {-webkit-transform-origin: 0 0;transform-origin: 0 0;-webkit-transform: perspective(800px) rotateX(0deg);transform: perspective(800px) rotateX(0deg);}}`,
+          'rotate-down': `{0% {opacity: 1;-webkit-transform-origin: 0 0;transform-origin: 0 0;-webkit-transform: perspective(800px) rotateX(0deg) translateZ(0px);transform: perspective(800px) rotateX(0deg) translateZ(0px);}100% {opacity: 0;-webkit-transform-origin: 50% 100%;transform-origin: 50% 100%;-webkit-transform: perspective(800px) rotateX(-180deg) translateZ(300px);transform: perspective(800px) rotateX(-180deg) translateZ(300px);}}`,
+          'rotate-left': `{0% {opacity: 1;-webkit-transform-origin: 0 0;transform-origin: 0 0;-webkit-transform: perspective(800px) rotateY(0deg) translateZ(0px);transform: perspective(800px) rotateY(0deg) translateZ(0px);}100% {opacity: 0;-webkit-transform-origin: 50% 0;transform-origin: 50% 0;-webkit-transform: perspective(800px) rotateY(-180deg) translateZ(300px);transform: perspective(800px) rotateY(-180deg) translateZ(300px);}}`,
+          'rotate-right': `{0% {opacity: 1;-webkit-transform-origin: 0 0;transform-origin: 0 0;-webkit-transform: perspective(800px) rotateY(0deg) translate3d(0px);transform: perspective(800px) rotateY(0deg) translate3d(0px);}100% {opacity: 0;-webkit-transform-origin: 50% 0;transform-origin: 50% 0;-webkit-transform: perspective(800px) rotateY(180deg) translateZ(150px);transform: perspective(800px) rotateY(180deg) translateZ(150px);}}`,
+          'rotate-up': `{0% {opacity: 1;-webkit-transform-origin: 0 0;transform-origin: 0 0;-webkit-transform: perspective(800px) rotateX(0deg) translateZ(0px);transform: perspective(800px) rotateX(0deg) translateZ(0px);}100% {opacity: 0;-webkit-transform-origin: 50% 0;transform-origin: 50% 0;-webkit-transform: perspective(800px) rotateX(180deg) translateZ(100px);transform: perspective(800px) rotateX(180deg) translateZ(100px);}}`,
+          'slide-down': `{0% {-webkit-transform-origin: 0 0;transform-origin: 0 0;-webkit-transform: translateY(0%);transform: translateY(0%);}100% {-webkit-transform-origin: 0 0;transform-origin: 0 0;-webkit-transform: translateY(100%);transform: translateY(100%);}}`,
+          'slide-down-return': `{0% {-webkit-transform-origin: 0 0;transform-origin: 0 0;-webkit-transform: translateY(100%);transform: translateY(100%);}100% {-webkit-transform-origin: 0 0;transform-origin: 0 0;-webkit-transform: translateY(0%);transform: translateY(0%);}}`,
+          'slide-left': `{0% {-webkit-transform-origin: 0 0;transform-origin: 0 0;-webkit-transform: translateX(0%);transform: translateX(0%);}100% {-webkit-transform-origin: 0 0;transform-origin: 0 0;-webkit-transform: translateX(-100%);transform: translateX(-100%);}}`,
+          'slide-left-return': `{0% {-webkit-transform-origin: 0 0;transform-origin: 0 0;-webkit-transform: translateX(-100%);transform: translateX(-100%);}100% {-webkit-transform-origin: 0 0;transform-origin: 0 0;-webkit-transform: translateX(0%);transform: translateX(0%);}}`,
+          'slide-right': `{0% {-webkit-transform-origin: 0 0;transform-origin: 0 0;-webkit-transform: translateX(0%);transform: translateX(0%);}100% {-webkit-transform-origin: 0 0;transform-origin: 0 0;-webkit-transform: translateX(100%);transform: translateX(100%);}}`,
+          'slide-right-return': `{0% {-webkit-transform-origin: 0 0;transform-origin: 0 0;-webkit-transform: translateX(100%);transform: translateX(100%);}100% {-webkit-transform-origin: 0 0;transform-origin: 0 0;-webkit-transform: translateX(0%);transform: translateX(0%);}}`,
+          'slide-up': `{0% {-webkit-transform-origin: 0 0;transform-origin: 0 0;-webkit-transform: translateY(0%);transform: translateY(0%);}100% {-webkit-transform-origin: 0 0;transform-origin: 0 0;-webkit-transform: translateY(-100%);transform: translateY(-100%);}}`,
+          'slide-up-return': `{0% {-webkit-transform-origin: 0 0;transform-origin: 0 0;-webkit-transform: translateY(-100%);transform: translateY(-100%);}100% {-webkit-transform-origin: 0 0;transform-origin: 0 0;-webkit-transform: translateY(0%);transform: translateY(0%);}}`,
+          'open-down-left': '{0%{-webkit-transform-origin:bottomleft;transform-origin:bottomleft;-webkit-transform:rotate(0deg);transform:rotate(0deg);-webkit-animation-timing-function:ease-out;animation-timing-function:ease-out;}100%{-webkit-transform-origin:bottomleft;transform-origin:bottomleft;-webkit-transform:rotate(-110deg);transform:rotate(-110deg);-webkit-animation-timing-function:ease-in-out;animation-timing-function:ease-in-out;}}',
+          'open-down-left-return': '{0%{-webkit-transform-origin:bottomleft;transform-origin:bottomleft;-webkit-transform:rotate(-110deg);transform:rotate(-110deg);-webkit-animation-timing-function:ease-in-out;animation-timing-function:ease-in-out;}100%{-webkit-transform-origin:bottomleft;transform-origin:bottomleft;-webkit-transform:rotate(0deg);transform:rotate(0deg);-webkit-animation-timing-function:ease-out;animation-timing-function:ease-out;}}',
+          'open-down-right': '{0%{-webkit-transform-origin:bottomright;transform-origin:bottomright;-webkit-transform:rotate(0deg);transform:rotate(0deg);-webkit-animation-timing-function:ease-out;animation-timing-function:ease-out;}100%{-webkit-transform-origin:bottomright;transform-origin:bottomright;-webkit-transform:rotate(110deg);transform:rotate(110deg);-webkit-animation-timing-function:ease-in-out;animation-timing-function:ease-in-out;}}',
+          'open-down-right-return': '{0%{-webkit-transform-origin:bottomright;transform-origin:bottomright;-webkit-transform:rotate(110deg);transform:rotate(110deg);-webkit-animation-timing-function:ease-in-out;animation-timing-function:ease-in-out;}100%{-webkit-transform-origin:bottomright;transform-origin:bottomright;-webkit-transform:rotate(0deg);transform:rotate(0deg);-webkit-animation-timing-function:ease-out;animation-timing-function:ease-out;}}',
+          'open-up-left': '{0%{-webkit-transform-origin:topleft;transform-origin:topleft;-webkit-transform:rotate(0deg);transform:rotate(0deg);-webkit-animation-timing-function:ease-out;animation-timing-function:ease-out;}100%{-webkit-transform-origin:topleft;transform-origin:topleft;-webkit-transform:rotate(110deg);transform:rotate(110deg);-webkit-animation-timing-function:ease-in-out;animation-timing-function:ease-in-out;}}',
+          'open-up-left-return': '{0%{-webkit-transform-origin:topleft;transform-origin:topleft;-webkit-transform:rotate(110deg);transform:rotate(110deg);-webkit-animation-timing-function:ease-in-out;animation-timing-function:ease-in-out;}100%{-webkit-transform-origin:topleft;transform-origin:topleft;-webkit-transform:rotate(0deg);transform:rotate(0deg);-webkit-animation-timing-function:ease-out;animation-timing-function:ease-out;}}',
+          'open-up-right': '{0%{-webkit-transform-origin:topright;transform-origin:topright;-webkit-transform:rotate(0deg);transform:rotate(0deg);-webkit-animation-timing-function:ease-out;animation-timing-function:ease-out;}100%{-webkit-transform-origin:topright;transform-origin:topright;-webkit-transform:rotate(-110deg);transform:rotate(-110deg);-webkit-animation-timing-function:ease-in-out;animation-timing-function:ease-in-out;}}',
+          'open-up-right-return': '{0%{-webkit-transform-origin:topright;transform-origin:topright;-webkit-transform:rotate(-110deg);transform:rotate(-110deg);-webkit-animation-timing-function:ease-in-out;animation-timing-function:ease-in-out;}100%{-webkit-transform-origin:topright;transform-origin:topright;-webkit-transform:rotate(0deg);transform:rotate(0deg);-webkit-animation-timing-function:ease-out;animation-timing-function:ease-out;}}',
+          'open-down-left-out': '{0%{opacity:1;-webkit-transform-origin:bottomleft;transform-origin:bottomleft;-webkit-transform:rotate(0deg);transform:rotate(0deg);-webkit-animation-timing-function:ease-out;animation-timing-function:ease-out;}100%{opacity:0;-webkit-transform-origin:bottomleft;transform-origin:bottomleft;-webkit-transform:rotate(-110deg);transform:rotate(-110deg);-webkit-animation-timing-function:ease-in-out;animation-timing-function:ease-in-out;}}',
+          'open-down-right-out': '{0%{opacity:1;-webkit-transform-origin:bottomright;transform-origin:bottomright;-webkit-transform:rotate(0deg);transform:rotate(0deg);-webkit-animation-timing-function:ease-out;animation-timing-function:ease-out;}100%{opacity:0;-webkit-transform-origin:bottomright;transform-origin:bottomright;-webkit-transform:rotate(110deg);transform:rotate(110deg);-webkit-animation-timing-function:ease-in-out;animation-timing-function:ease-in-out;}}',
+          'open-up-left-out': '{0%{opacity:1;-webkit-transform-origin:topleft;transform-origin:topleft;-webkit-transform:rotate(0deg);transform:rotate(0deg);-webkit-animation-timing-function:ease-out;animation-timing-function:ease-out;}100%{opacity:0;-webkit-transform-origin:topleft;transform-origin:topleft;-webkit-transform:rotate(110deg);transform:rotate(110deg);-webkit-animation-timing-function:ease-in-out;animation-timing-function:ease-in-out;}}',
+          'open-up-right-out': '{0%{opacity:1;-webkit-transform-origin:topright;transform-origin:topright;-webkit-transform:rotate(0deg);transform:rotate(0deg);-webkit-animation-timing-function:ease-out;animation-timing-function:ease-out;}100%{opacity:0;-webkit-transform-origin:topright;transform-origin:topright;-webkit-transform:rotate(-110deg);transform:rotate(-110deg);-webkit-animation-timing-function:ease-in-out;animation-timing-function:ease-in-out;}}',
+          'tin-down-in': '{0%{opacity:0;-webkit-transform:scale(1,1)translateY(900%);transform:scale(1,1)translateY(900%);}50%,70%,90%{opacity:1;-webkit-transform:scale(1.1,1.1)translateY(0);transform:scale(1.1,1.1)translateY(0);}60%,80%,100%{opacity:1;-webkit-transform:scale(1,1)translateY(0);transform:scale(1,1)translateY(0);}}',
+          'tin-down-out': '{0%,20%,40%,50%{opacity:1;-webkit-transform:scale(1,1)translateY(0);transform:scale(1,1)translateY(0);}10%,30%{opacity:1;-webkit-transform:scale(1.1,1.1)translateY(0);transform:scale(1.1,1.1)translateY(0);}100%{opacity:0;-webkit-transform:scale(1,1)translateY(900%);transform:scale(1,1)translateY(900%);}}',
+          'tin-left-in': '{0%{opacity:0;-webkit-transform:scale(1,1)translateX(-900%);transform:scale(1,1)translateX(-900%);}50%,70%,90%{opacity:1;-webkit-transform:scale(1.1,1.1)translateX(0);transform:scale(1.1,1.1)translateX(0);}60%,80%,100%{opacity:1;-webkit-transform:scale(1,1)translateX(0);transform:scale(1,1)translateX(0);}}',
+          'tin-left-out': '{0%,20%,40%,50%{opacity:1;-webkit-transform:scale(1,1)translateX(0);transform:scale(1,1)translateX(0);}10%,30%{opacity:1;-webkit-transform:scale(1.1,1.1)translateX(0);transform:scale(1.1,1.1)translateX(0);}100%{opacity:0;-webkit-transform:scale(1,1)translateX(-900%);transform:scale(1,1)translateX(-900%);}}',
+          'tin-right-in': '{0%{opacity:0;-webkit-transform:scale(1,1)translateX(900%);transform:scale(1,1)translateX(900%);}50%,70%,90%{opacity:1;-webkit-transform:scale(1.1,1.1)translateX(0);transform:scale(1.1,1.1)translateX(0);}60%,80%,100%{opacity:1;-webkit-transform:scale(1,1)translateX(0);transform:scale(1,1)translateX(0);}}',
+          'tin-right-out': '{0%,20%,40%,50%{opacity:1;-webkit-transform:scale(1,1)translateX(0);transform:scale(1,1)translateX(0);}10%,30%{opacity:1;-webkit-transform:scale(1.1,1.1)translateX(0);transform:scale(1.1,1.1)translateX(0);}100%{opacity:0;-webkit-transform:scale(1,1)translateX(900%);transform:scale(1,1)translateX(900%);}}',
+          'tin-up-in': '{0%{opacity:0;-webkit-transform:scale(1,1)translateY(-900%);transform:scale(1,1)translateY(-900%);}50%,70%,90%{opacity:1;-webkit-transform:scale(1.1,1.1)translateY(0);transform:scale(1.1,1.1)translateY(0);}60%,80%,100%{opacity:1;-webkit-transform:scale(1,1)translateY(0);transform:scale(1,1)translateY(0);}}',
+          'tin-up-out': '{0%,20%,40%,50%{opacity:1;-webkit-transform:scale(1,1)translateY(0);transform:scale(1,1)translateY(0);}10%,30%{opacity:1;-webkit-transform:scale(1.1,1.1)translateY(0);transform:scale(1.1,1.1)translateY(0);}100%{opacity:0;-webkit-transform:scale(1,1)translateY(-900%);transform:scale(1,1)translateY(-900%);}}',
+        },
+        category: {
+          'puff-in': 'Bling',
+          'puff-out': 'Bling',
+          'vanish-in': 'Bling',
+          'vanish-out': 'Bling',
+          'boing-in-up': 'Boing',
+          'boing-out-down': 'Boing',
+          'bomb-left-out': 'Bomb',
+          'bomb-right-out': 'Bomb',
+          'magic': 'Magic Effects',
+          'swap': 'Magic Effects',
+          'twister-in-down': 'Magic Effects',
+          'twister-in-up': 'Magic Effects',
+          'foolish-in': 'Math',
+          'foolish-out': 'Math',
+          'hole-out': 'Math',
+          'swash-in': 'Math',
+          'swash-out': 'Math',
+          'space-in-down': 'Space',
+          'space-in-left': 'Space',
+          'space-in-right': 'Space',
+          'space-in-up': 'Space',
+          'space-out-down': 'Space',
+          'space-out-left': 'Space',
+          'space-out-right': 'Space',
+          'space-out-up': 'Space',
+          'perspective-down': 'Perspective',
+          'perspective-down-return': 'Perspective',
+          'perspective-left': 'Perspective',
+          'perspective-left-return': 'Perspective',
+          'perspective-right': 'Perspective',
+          'perspective-right-return': 'Perspective',
+          'perspective-up': 'Perspective',
+          'perspective-up-return': 'Perspective',
+          'rotate-down': 'Rotate',
+          'rotate-left': 'Rotate',
+          'rotate-right': 'Rotate',
+          'rotate-up': 'Rotate',
+          'slide-down': 'Slide',
+          'slide-down-return': 'Slide',
+          'slide-left': 'Slide',
+          'slide-left-return': 'Slide',
+          'slide-right': 'Slide',
+          'slide-right-return': 'Slide',
+          'slide-up': 'Slide',
+          'slide-up-return': 'Slide',
+          'open-down-left': 'Static Effects',
+          'open-down-left-return': 'Static Effects',
+          'open-down-right': 'Static Effects',
+          'open-down-right-return': 'Static Effects',
+          'open-up-left': 'Static Effects',
+          'open-up-left-return': 'Static Effects',
+          'open-up-right': 'Static Effects',
+          'open-up-right-return': 'Static Effects',
+          'open-down-left-out': 'Static Effects Out',
+          'open-down-right-out': 'Static Effects Out',
+          'open-up-left-out': 'Static Effects Out',
+          'open-up-right-out': 'Static Effects Out',
+          'tin-down-in': 'Tin',
+          'tin-down-out': 'Tin',
+          'tin-left-in': 'Tin',
+          'tin-left-out': 'Tin',
+          'tin-right-in': 'Tin',
+          'tin-right-out': 'Tin',
+          'tin-up-in': 'Tin',
+          'tin-up-out': 'Tin',
         },
       },
-    ],
-
-    // You can also define built-in presets
-    presets: [
-      // ...
-    ],
-
-    // You can also define built-in transformers
-    transformers: [
-      // ...
-    ],
-
-    // Customize AutoComplete
-    autocomplete: {
-      shorthands: {
-        span: Array.from({ length: span }, (_, i) => `${i + 1}`),
-      },
-    },
+    } as Theme,
   }
 })
