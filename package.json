@@ -1,7 +1,7 @@
 {
   "name": "unocss-preset-magicss",
   "type": "module",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "packageManager": "pnpm@9.13.2",
   "description": "Integrate magic animation into unocss preset.",
   "author": "Chris <https://github.com/zyyv>",
