@@ -5,7 +5,7 @@ import { presetMagicss } from '../src'
 it('presetStarter', async () => {
   const uno = await createGenerator({
     presets: [
-      presetUno({ preflight: 'on-demand' }),
+      presetUno({ preflight: 'on-demand' }) as any,
       presetMagicss(),
     ],
   })

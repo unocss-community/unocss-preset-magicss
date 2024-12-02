@@ -1,7 +1,6 @@
-import type { Theme } from '@unocss/preset-mini'
 import { definePreset } from 'unocss'
 
-export const presetMagicss = definePreset<Theme>(() => {
+export const presetMagicss = definePreset(() => {
   const property = { 'animation-fill-mode': 'both' }
 
   return {
@@ -210,6 +209,6 @@ export const presetMagicss = definePreset<Theme>(() => {
           'tin-up-out': 'Tin',
         },
       },
-    } as Theme,
+    },
   }
 })
