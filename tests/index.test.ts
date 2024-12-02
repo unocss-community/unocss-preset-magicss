@@ -3,13 +3,13 @@ import { expect, it } from 'vitest'
 import { presetMagicss } from '../src'
 
 it('presetStarter', async () => {
-  const uno = createGenerator({
+  const uno = await createGenerator({
     presets: [
-      presetUno(),
+      presetUno({ preflight: 'on-demand' }),
       presetMagicss(),
     ],
   })
-  const { css } = await uno.generate('animate-magic', { preflights: false })
+  const { css } = await uno.generate('animate-magic')
 
   expect(css).toMatchInlineSnapshot(`
     "/* layer: default */
